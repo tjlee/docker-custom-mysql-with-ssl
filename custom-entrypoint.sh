@@ -10,8 +10,10 @@ if [ "$SERVER_KEY" ]; then
 fi
 
 echo -e "[mysqld]\n" >/etc/mysql/conf.d/custom.cnf
+
 for var in $(env | grep MYSQLD_ | sed 's/MYSQLD_//'); do
   echo $var | tr '[:upper:]' '[:lower:]' >>/etc/mysql/conf.d/custom.cnf
 done
 
-exec /entrypoint.sh $*
+
+exec /docker-entrypoint.sh $*
